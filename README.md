@@ -14,7 +14,7 @@ See the test file for examples.
 
 ## Testing
 
-Running the tests start a UDP server that will respond with mock responses.
+Running the tests start a local UDP server that will respond with mock responses.
 
 ```
 go test
