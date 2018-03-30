@@ -1,6 +1,6 @@
 # AssaultCube Server Pinger for Go
 
-This library provides methods to fetch server status and information using [AssaultCube](https://assault.cubers.net/)'s UDP binary protocol.
+This Golang library provides methods to fetch a server's status using [AssaultCube](https://assault.cubers.net/)'s UDP binary protocol.
 
 ## Installation
 
