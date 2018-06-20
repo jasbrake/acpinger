@@ -103,7 +103,7 @@ func TestStdPingSucceedsWhenReplyValid(t *testing.T) {
 		t.Errorf("Expected MasterMode to be 0, found %d\n", pong.Mastermode)
 	}
 	if pong.Password {
-		t.Errorf("Expected Password to be false, found '%s'\n", pong.Password)
+		t.Errorf("Expected Password to be false, found '%t'\n", pong.Password)
 	}
 }
 
