@@ -120,7 +120,7 @@ func TestExtPingSucceedsWhenReplyValid(t *testing.T) {
 		t.Error(err)
 	}
 
-	if pong.Ack != 255 {
+	if pong.Ack != -1 {
 		t.Errorf("Expected Ack to be 255, found %d", pong.Ack)
 	}
 	if pong.Version != 104 {
@@ -129,61 +129,61 @@ func TestExtPingSucceedsWhenReplyValid(t *testing.T) {
 	if pong.ErrorFlag != 0 {
 		t.Errorf("Expected ErrorFlag to be 0, found %d", pong.ErrorFlag)
 	}
-	if pong.PlayerStatsRespIDs != 246 {
+	if pong.PlayerStatsRespIDs != -10 {
 		t.Errorf("Expected PlayerStatsRespIDs to be 246, found %d", pong.PlayerStatsRespIDs)
 	}
-	if pong.PlayerStatsRespStats != 245 {
+	if pong.PlayerStatsRespStats != -11 {
 		t.Errorf("Expected PlayerStatsRespStats to be 245, found %d", pong.PlayerStatsRespStats)
 	}
 	if pong.PlayerCount != 1 || len(pong.Players) != 1 {
 		t.Errorf("Expected PlayerCount to be 1, found PlayerCount: %d, length of Players array: %d", pong.PlayerCount, len(pong.Players))
-	}
-
-	p := pong.Players[0]
-	if p.ClientNumber != 0 {
-		t.Errorf("Expected ClientNumber to be 0, found %d", p.ClientNumber)
-	}
-	if p.Ping != 186 {
-		t.Errorf("Expected Ping to be 186, found %d", p.Ping)
-	}
-	if p.Name != "Player1" {
-		t.Errorf("Expected Name to be 'Player1', found '%s'", p.Name)
-	}
-	if p.Team != "CLA" {
-		t.Errorf("Expected Team to be 'CLA', found '%s'", p.Team)
-	}
-	if p.Frags != 0 {
-		t.Errorf("Expected Frags to be 0, found %d", p.Frags)
-	}
-	if p.Flagscore != 0 {
-		t.Errorf("Expected Flagscore to be 0, found %d", p.Flagscore)
-	}
-	if p.Deaths != 1 {
-		t.Errorf("Expected Deaths to be 1, found %d", p.Deaths)
-	}
-	if p.Teamkills != 0 {
-		t.Errorf("Expected Teamkills to be 0, found %d", p.Teamkills)
-	}
-	if p.Accuracy != 0 {
-		t.Errorf("Expected Accuracy to be 0, found %d", p.Accuracy)
-	}
-	if p.Health != 100 {
-		t.Errorf("Expected Health to be 100, found %d", p.Health)
-	}
-	if p.Armour != 0 {
-		t.Errorf("Expected Armour to be 0, found %d", p.Armour)
-	}
-	if p.GunSelected != 8 {
-		t.Errorf("Expected GunSelected to be 8, found %d", p.GunSelected)
-	}
-	if p.Role != 0 {
-		t.Errorf("Expected Role to be 0, found %d", p.Role)
-	}
-	if p.State != 0 {
-		t.Errorf("Expected State to be 0, found %d", p.State)
-	}
-	if p.IP != "1.2.3.0/24" {
-		t.Errorf("Expected IP to be 1.2.3.0/24, found %s", p.IP)
+	} else {
+		p := pong.Players[0]
+		if p.ClientNumber != 0 {
+			t.Errorf("Expected ClientNumber to be 0, found %d", p.ClientNumber)
+		}
+		if p.Ping != 186 {
+			t.Errorf("Expected Ping to be 186, found %d", p.Ping)
+		}
+		if p.Name != "Player1" {
+			t.Errorf("Expected Name to be 'Player1', found '%s'", p.Name)
+		}
+		if p.Team != "CLA" {
+			t.Errorf("Expected Team to be 'CLA', found '%s'", p.Team)
+		}
+		if p.Frags != 0 {
+			t.Errorf("Expected Frags to be 0, found %d", p.Frags)
+		}
+		if p.Flagscore != 0 {
+			t.Errorf("Expected Flagscore to be 0, found %d", p.Flagscore)
+		}
+		if p.Deaths != 1 {
+			t.Errorf("Expected Deaths to be 1, found %d", p.Deaths)
+		}
+		if p.Teamkills != 0 {
+			t.Errorf("Expected Teamkills to be 0, found %d", p.Teamkills)
+		}
+		if p.Accuracy != 0 {
+			t.Errorf("Expected Accuracy to be 0, found %d", p.Accuracy)
+		}
+		if p.Health != 100 {
+			t.Errorf("Expected Health to be 100, found %d", p.Health)
+		}
+		if p.Armour != 0 {
+			t.Errorf("Expected Armour to be 0, found %d", p.Armour)
+		}
+		if p.GunSelected != 8 {
+			t.Errorf("Expected GunSelected to be 8, found %d", p.GunSelected)
+		}
+		if p.Role != 0 {
+			t.Errorf("Expected Role to be 0, found %d", p.Role)
+		}
+		if p.State != 0 {
+			t.Errorf("Expected State to be 0, found %d", p.State)
+		}
+		if p.IP != "1.2.3.0/24" {
+			t.Errorf("Expected IP to be 1.2.3.0/24, found %s", p.IP)
+		}
 	}
 }
 

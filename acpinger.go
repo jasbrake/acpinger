@@ -79,7 +79,7 @@ func PingExt(ip string, port int, readTimeout time.Duration) (ExtPong, error) {
 	pong := ExtPong{}
 	// This loop logic is necessary because occasionally a server will send a
 	// player before the extended pong server information.
-	for pong.PlayerStatsRespIDs != 246 || len(pong.Players) < pong.PlayerCount {
+	for pong.PlayerStatsRespIDs != -10 || len(pong.Players) < pong.PlayerCount {
 		res := make([]byte, 1024)
 		c.SetReadDeadline(time.Now().Add(readTimeout))
 		n, err := c.Read(res)

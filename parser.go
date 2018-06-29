@@ -79,8 +79,7 @@ func (p *parser) parseExt(pong *ExtPong) {
 	pong.ErrorFlag = p.getInt()
 	playerStatsResp := p.getInt()
 
-	// 246 is the same as -10 signed int.
-	if playerStatsResp == 246 {
+	if playerStatsResp == -10 {
 		pong.PlayerStatsRespIDs = playerStatsResp
 		pong.PlayerCount = len(p.bytes[p.i:])
 		p.i += pong.PlayerCount
@@ -115,24 +114,24 @@ func (p *parser) parsePlayer() Player {
 	return player
 }
 
+func (p *parser) hasMore() bool {
+	return p.i < len(p.bytes)
+}
+
 func (p *parser) getInt() int {
-	var n int
-	if p.bytes[p.i] == 0x80 {
-		n = int(p.bytes[p.i+1]) | int(p.bytes[p.i+2])<<8
-		p.i += 3
-		return n
-	} else if p.bytes[p.i] == 0x81 {
-		n = int(p.bytes[p.i+1]) | int(p.bytes[p.i+2])<<8 | int(p.bytes[p.i+3])<<16 | int(p.bytes[p.i+3])<<32
-		p.i += 4
-		return n
-	} else {
-		n = int(p.bytes[p.i])
-		p.i++
-		return n
+	c := int(int8(p.getByte()))
+	if c == -128 {
+		return int(p.getByte()) | int(int8(p.getByte()))<<8
+	} else if c == -127 {
+		return int(p.getByte()) | int(p.getByte())<<8 | int(p.getByte())<<16 | int(p.getByte())<<32
 	}
+	return c
 }
 
 func (p *parser) getByte() byte {
+	if !p.hasMore() {
+		fmt.Errorf("getByte: out of range, attempting to access index %d (slice has length %d)", p.i, len(p.bytes))
+	}
 	b := p.bytes[p.i]
 	p.i++
 	return b
